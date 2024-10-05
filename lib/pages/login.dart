@@ -8,16 +8,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String email = '';
+  String senha = '';
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(  //Scrool que limita o teclado
+      body: SingleChildScrollView(
+        //Scrool que limita o teclado
         child: ConstrainedBox(
           constraints:
               BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-              //a box obtem o tamanho total dispositivo que esta executando
+          //a box obtem o tamanho total dispositivo que esta executando
           child: SizedBox(
             width: double.infinity,
             child: Column(
@@ -26,13 +29,11 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 70,
                 ),
-                   
-               
                 Row(
                   children: [
                     Expanded(child: Container()),
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: Image.network(
                         "https://logopng.com.br/logos/google-37.png",
                       ),
@@ -40,7 +41,6 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(child: Container()),
                   ],
                 ),
-                
                 const SizedBox(
                   height: 30,
                 ),
@@ -56,34 +56,33 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text('Primeiro faça o login, depois a diferença.',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.normal))),
-              
                 const SizedBox(
                   height: 50,
                 ),
-          
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: 5),
                         hintText: 'informe seu email ',
                         icon: Icon(Icons.email),
                         hintStyle: TextStyle(color: Colors.grey)),
+                    
+                    onChanged: (value) => {email = value},    
+
                   ),
                 ),
-                
-          
-          
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: 15),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -92,13 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                             Icons.lock), //icone  desgrudadoe do edit   $ ___
                         suffixIcon: Icon(Icons.visibility),
                         hintStyle: TextStyle(color: Colors.grey)),
+                    onChanged: (value) => {senha = value},        
                   ),
                 ),
-          
-                
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15),
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
@@ -107,7 +103,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(email);
+                        print(senha);
+                      },
                       style: ButtonStyle(
                           shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
@@ -121,7 +120,6 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white)),
                     ),
                   ),
-                              
                 ),
                 Expanded(child: Container()),
                 Container(
@@ -134,7 +132,6 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 14,
                       )),
                 ),
-                
                 Container(
                     alignment: Alignment.center,
                     width: double.infinity,
@@ -146,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue))),
-                const Padding(padding: EdgeInsets.all(30)),
+                const SizedBox(height: 15),
               ],
             ),
           ),
