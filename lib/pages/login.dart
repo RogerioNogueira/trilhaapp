@@ -8,9 +8,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _email = TextEditingController();
+  TextEditingController _senha = TextEditingController();
   String email = '';
   String senha = '';
-  
+  bool OlhoDaSenha = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,9 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: 'informe seu email ',
                         icon: Icon(Icons.email),
                         hintStyle: TextStyle(color: Colors.grey)),
-                    
-                    onChanged: (value) => {email = value},    
-
+                    onChanged: (value) => {email = value},
                   ),
                 ),
                 Container(
@@ -81,17 +82,26 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
                   child: TextField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 15),
-                        enabledBorder: UnderlineInputBorder(
+                    obscureText: OlhoDaSenha,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 15),
+                        enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         hintText: 'Senha ',
-                        icon: Icon(
+                        icon: const Icon(
                             Icons.lock), //icone  desgrudadoe do edit   $ ___
-                        suffixIcon: Icon(Icons.visibility),
-                        hintStyle: TextStyle(color: Colors.grey)),
-                    onChanged: (value) => {senha = value},        
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              OlhoDaSenha = !OlhoDaSenha;
+                            });
+                          },
+                          child: Icon(OlhoDaSenha
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.grey)),
+                    onChanged: (value) => {senha = value},
                   ),
                 ),
                 const SizedBox(height: 15),
