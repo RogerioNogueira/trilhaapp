@@ -8,11 +8,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _senha = TextEditingController();
-  String email = '';
-  String senha = '';
-  bool OlhoDaSenha = true;
+  TextEditingController emailcontroler =
+      TextEditingController(text: ('Joao@bol.com'));
+  TextEditingController senhacontroler = TextEditingController();
+
+  bool olhoDaSenha = true;
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
                   child: TextField(
+                    controller: emailcontroler,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: 5),
                         hintText: 'informe seu email ',
                         icon: Icon(Icons.email),
                         hintStyle: TextStyle(color: Colors.grey)),
-                    onChanged: (value) => {email = value},
+                    onChanged: (value) => {debugPrint(value)},
                   ),
                 ),
                 Container(
@@ -82,7 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
                   child: TextField(
-                    obscureText: OlhoDaSenha,
+                    controller: senhacontroler,
+                    obscureText: olhoDaSenha,
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(top: 15),
                         enabledBorder: const UnderlineInputBorder(
@@ -93,15 +95,15 @@ class _LoginPageState extends State<LoginPage> {
                         suffixIcon: InkWell(
                           onTap: () {
                             setState(() {
-                              OlhoDaSenha = !OlhoDaSenha;
+                              olhoDaSenha = !olhoDaSenha;
                             });
                           },
-                          child: Icon(OlhoDaSenha
+                          child: Icon(olhoDaSenha
                               ? Icons.visibility_off
                               : Icons.visibility),
                         ),
                         hintStyle: const TextStyle(color: Colors.grey)),
-                    onChanged: (value) => {senha = value},
+                    onChanged: (value) => {debugPrint(value)},
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -114,8 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () {
-                        print(email);
-                        print(senha);
+                        if (emailcontroler.text.trim() == 'Joao@bol.com' &&
+                            senhacontroler.text == '123'.trim()) {
+                          debugPrint('Logado');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('senha errada ')));
+                        }
                       },
                       style: ButtonStyle(
                           shape: WidgetStatePropertyAll(RoundedRectangleBorder(
