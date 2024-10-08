@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,39 +9,45 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailcontroler =
+      TextEditingController(text: ('Joao@bol.com'));
+  TextEditingController senhacontroler = TextEditingController();
+
+  bool olhoDaSenha = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(  //Scrool que limita o teclado
+      body: SingleChildScrollView(
+        //Scrool que limita o teclado
         child: ConstrainedBox(
           constraints:
               BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-              //a box obtem o tamanho total dispositivo que esta executando
+          //a box obtem o tamanho total dispositivo que esta executando
           child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 70,
+                  height: 30,
                 ),
-                   
-               
                 Row(
                   children: [
                     Expanded(child: Container()),
                     Expanded(
-                      flex: 2,
+                      flex: 0,
                       child: Image.network(
-                        "https://logopng.com.br/logos/google-37.png",
+                        //"https://logopng.com.br/logos/google-37.png",
+                        //"https://logodownload.org/wp-content/uploads/2014/10/red-bull-logo-3-1.png",
+                        "https://img.freepik.com/vetores-premium/elemento-de-design-de-lindo-beija-flor-de-vetor-livre-para-banners-cartazes-folhetos-e-folhetos_1009653-1.jpg",
+                        height: 150, 
                       ),
                     ),
                     Expanded(child: Container()),
                   ],
                 ),
-                
                 const SizedBox(
                   height: 30,
                 ),
@@ -56,49 +63,54 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text('Primeiro faça o login, depois a diferença.',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.normal))),
-              
                 const SizedBox(
                   height: 50,
                 ),
-          
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: emailcontroler,
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: 5),
                         hintText: 'informe seu email ',
                         icon: Icon(Icons.email),
                         hintStyle: TextStyle(color: Colors.grey)),
+                    onChanged: (value) => {debugPrint(value)},
                   ),
                 ),
-                
-          
-          
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
                   margin: const EdgeInsetsDirectional.symmetric(horizontal: 30),
                   height: 50,
-                  child: const TextField(
+                  child: TextField(
+                    controller: senhacontroler,
+                    obscureText: olhoDaSenha,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 15),
-                        enabledBorder: UnderlineInputBorder(
+                        contentPadding: const EdgeInsets.only(top: 15),
+                        enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         hintText: 'Senha ',
-                        icon: Icon(
+                        icon: const Icon(
                             Icons.lock), //icone  desgrudadoe do edit   $ ___
-                        suffixIcon: Icon(Icons.visibility),
-                        hintStyle: TextStyle(color: Colors.grey)),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              olhoDaSenha = !olhoDaSenha;
+                            });
+                          },
+                          child: Icon(olhoDaSenha
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.grey)),
+                    onChanged: (value) => {debugPrint(value)},
                   ),
                 ),
-          
-                
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15),
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
@@ -107,7 +119,20 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (emailcontroler.text.trim() == 'Joao@bol.com' &&
+                            senhacontroler.text.trim() == '123'.trim()) {
+                          //ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Logado ')));
+
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MainPage()));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('senha errada ')));
+                        }
+                      },
                       style: ButtonStyle(
                           shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
@@ -121,7 +146,6 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white)),
                     ),
                   ),
-                              
                 ),
                 Expanded(child: Container()),
                 Container(
@@ -134,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 14,
                       )),
                 ),
-                
                 Container(
                     alignment: Alignment.center,
                     width: double.infinity,
@@ -146,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue))),
-                const Padding(padding: EdgeInsets.all(30)),
+                const SizedBox(height: 15),
               ],
             ),
           ),
