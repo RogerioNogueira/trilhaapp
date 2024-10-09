@@ -12,8 +12,10 @@ class pagina1Page extends StatefulWidget {
 class _pagina1PageState extends State<pagina1Page> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white10,
+    return Image.network(
+      //fit: BoxFit.cover,
+      "https://ouroservice.com.br/paginaEmConstrucao.png",
+     
     );
   }
 }

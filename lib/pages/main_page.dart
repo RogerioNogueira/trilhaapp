@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const DadosCadastrais(
-                              nomeDatela: 'Sobre cadastro')));
+                              nomeDatela: 'Dados cadastrais')));
                 },
               ),
               InkWell(
@@ -74,7 +74,8 @@ class _MainPageState extends State<MainPage> {
               onPageChanged: (value) => setState(() {
                 posicaopagina = value;
               }),
-              // scrollDirection: Axis.vertical, //Direcao do giro da troca de pagina
+              scrollDirection:
+                  Axis.vertical, //Direcao do giro da troca de pagina
               children: const [pagina1Page(), pagina2Page(), Pagina3Page()],
             ),
           ),
@@ -85,7 +86,8 @@ class _MainPageState extends State<MainPage> {
               currentIndex: posicaopagina,
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(icon: Icon(Icons.edit), label: 'Edit'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.edit), label: 'Cadastro'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.exit_to_app), label: 'Exit'),
               ])

@@ -13,7 +13,7 @@ class _pagina2PageState extends State<pagina2Page> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amberAccent,
+      color: Colors.white,
     );
   }
 }

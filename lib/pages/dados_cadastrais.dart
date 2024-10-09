@@ -8,10 +8,17 @@ class DadosCadastrais extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(nomeDatela),
-      ),
-      body: const Center(
-        child: Text('Terra'),
+        title: Text(nomeDatela)),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Center(
+            child: Text(
+              'Nome',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          )
+        ]),
       ),
     );
   }
