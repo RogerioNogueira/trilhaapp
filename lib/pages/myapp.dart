@@ -11,8 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,textTheme: GoogleFonts.robotoCondensedTextTheme(),canvasColor: Colors.amber,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.blueAccent)),
+          primarySwatch: Colors.blueGrey,
+          textTheme: GoogleFonts.robotoCondensedTextTheme(),
+          canvasColor: const Color.fromARGB(255, 115, 174, 200),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Color.fromARGB(255, 115, 174, 200))),
       home: const LoginPage(),
     );
   }
